@@ -24,12 +24,22 @@ interface CartItemsAmount {
 const Home = (): JSX.Element => {
   const [products, setProducts] = useState<ProductFormatted[]>([]);
   const { addProduct, cart } = useCart();
+  console.log(products)
 
+  const objeto = {}
+
+
+    //Primeiro valor do reduce é o acumulador, 2. Valor Atual, 3.index, 4. array original
   const cartItemsAmount = cart.reduce((sumAmount, product) => {
-    console.log(sumAmount)
-    console.log(product)
-    console.log("Teste")
-  }, {} as CartItemsAmount)
+    
+    return sumAmount
+  }, {
+    objeto
+  } as CartItemsAmount)
+
+  console.log(cartItemsAmount)
+
+
 
   useEffect(() => {
     async function loadProducts() {
@@ -45,8 +55,8 @@ const Home = (): JSX.Element => {
   }
   return (
     <ProductList>
-      {products.map((product) => (
-        <li>
+      {products.map((product,index) => (
+        <li key={index}>
           <img src={product.image} alt="Tênis de Caminhada Leve Confortável" />
           <strong>{product.title}</strong>
           <span>R$ {product.price}</span>
@@ -57,7 +67,7 @@ const Home = (): JSX.Element => {
           >
             <div data-testid="cart-product-quantity">
               <MdAddShoppingCart size={16} color="#b8b8b8" />
-              {/* {cartItemsAmount[product.id] || 0} */} 20
+              {cartItemsAmount[product.id] || 0}
             </div>
   
             <span>ADICIONAR AO CARRINHO</span>
