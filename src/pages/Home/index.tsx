@@ -5,6 +5,7 @@ import { ProductList } from './styles';
 import { api } from '../../services/api';
 import { formatPrice } from '../../util/format';
 import { useCart } from '../../hooks/useCart';
+import { ListFormat } from 'typescript';
 
 interface Product {
   id: number;
@@ -23,6 +24,7 @@ interface CartItemsAmount {
 
 const Home = (): JSX.Element => {
   const [products, setProducts] = useState<ProductFormatted[]>([]);
+
   const { addProduct, cart } = useCart();
 
   
@@ -30,10 +32,34 @@ const Home = (): JSX.Element => {
   //Primeiro valor do reduce é o acumulador, 2. Valor Atual, 3.index, 4. array original
   console.log(cart)
   const cartItemsAmount = cart.reduce((sumAmount, product) => {
-    
-    console.log(product.id)
-    
-   return { ...sumAmount, [product.id]: product.amount }
+
+   switch(product.id){
+      case 1:
+        product.amount = 3
+        break
+        case 2:
+        product.amount = 5
+        break
+      case 3:
+        product.amount = 2 
+        break
+      case 4: 
+        product.amount = 1
+      break 
+      case 5:
+        product.amount = 5 
+        break 
+      case 6:
+        product.amount = 10 
+        break  
+      }
+      cart.filter(el => {
+        
+        console.log(el)
+      })
+      return {...sumAmount, [product.id]:1}
+  
+
   }, {
 
   } as CartItemsAmount)
@@ -44,6 +70,16 @@ const Home = (): JSX.Element => {
     addProduct(id)
   }
 
+
+
+  //Carrega os dado da api, Não mecha nisso.
+  useEffect(()=> {
+    async function loadProduct(){
+      const { data } = await api.get("/products")
+      setProducts(data)
+    }
+    loadProduct()
+  }, [])
 
   return (
     <ProductList>
@@ -59,7 +95,7 @@ const Home = (): JSX.Element => {
           >
             <div data-testid="cart-product-quantity">
               <MdAddShoppingCart size={16} color="#b8b8b8" />
-              {/*cartItemsAmount[product.id] || 0 */ }
+              {cartItemsAmount[product.id] || 0 }
 
             </div>
   
