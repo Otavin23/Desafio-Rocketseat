@@ -27,7 +27,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     //const saveProduct = localStorage.setItem("@RocketShoes:cart", cart)
     const storagedCart = localStorage.getItem('@RocketShoes:cart')
     if (storagedCart) {
-      //return JSON.parse(storagedCart)
+      //return JSON.parse(storagedCart)dddadaa
     }
 
     return [];
