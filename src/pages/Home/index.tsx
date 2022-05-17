@@ -30,7 +30,6 @@ const Home = (): JSX.Element => {
   
   
   //Primeiro valor do reduce é o acumulador, 2. Valor Atual, 3.index, 4. array original
-  console.log(cart)
   const cartItemsAmount = cart.reduce((sumAmount, product) => {
 
    switch(product.id){
