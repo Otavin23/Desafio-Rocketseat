@@ -52,24 +52,16 @@ const Home = (): JSX.Element => {
         product.amount = 10 
         break  
       }
-      cart.filter(el => {
-        
-        console.log(el)
-      })
-      return {...sumAmount, [product.id]:1}
+
+     return {...sumAmount, [product.id]:1}
+  }, { } as CartItemsAmount)
   
-
-  }, {
-
-  } as CartItemsAmount)
-
-  console.log(cartItemsAmount)
 
   function handleAddProduct(id: number) {
     addProduct(id)
   }
 
-
+  console.log(products)
 
   //Carrega os dado da api, Não mecha nisso.
   useEffect(()=> {
@@ -79,6 +71,8 @@ const Home = (): JSX.Element => {
     }
     loadProduct()
   }, [])
+
+ 
 
   return (
     <ProductList>

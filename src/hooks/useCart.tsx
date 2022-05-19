@@ -27,17 +27,21 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     //const saveProduct = localStorage.setItem("@RocketShoes:cart", cart)
     const storagedCart = localStorage.getItem('@RocketShoes:cart')
     if (storagedCart) {
-      //return JSON.parse(storagedCart)dddadaadadadadlllll
+      //return JSON.parse(storagedCart) 
     }
 
     return [];
   });
+  
+  console.log(cart)
   const addProduct = async (productId: number) => {
     try {
       // Verificar se o produto já esta no carrinho.
       // Verificar se tem estoque do produto. 
-      // Se estiver tudo certo eu retorno o produto 
+      // Se estiver tudo certo eu retorno o produto
+      
       const { data } = await api.get(`/products/${productId}`)
+
       setCart([...cart, data]) 
     } catch {
       // TODO
